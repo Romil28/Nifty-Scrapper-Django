@@ -1,0 +1,1 @@
+STANDARD_URL = "www.shareablelink.com/"

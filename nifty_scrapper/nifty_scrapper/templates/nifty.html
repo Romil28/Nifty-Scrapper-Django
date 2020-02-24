@@ -1,0 +1,95 @@
+{% block content %}
+
+<!DOCTYPE html>  
+<html>  
+    <head>  
+      
+        <style type="text/css">  
+        .container { 
+            width:600px; 
+            height:230px; 
+            background-color:yellow; 
+            padding-top:20px; 
+            padding-left:15px; 
+            padding-right:15px; 
+        }
+        .containerInside { 
+            width:100px; 
+            height:150px; 
+            background-color:blue; 
+            padding-top:20px; 
+            padding-left:15px; 
+            padding-right:15px; 
+        } 
+        #st-box { 
+            float:left; 
+            width:150px; 
+            height:150px; 
+            background-color:white; 
+            border:solid black; 
+        } 
+        #nd-box { 
+            float:left; 
+            width:150px; 
+            height:120px; 
+            background-color:white;  
+            border:solid black; 
+            margin-left:20px; 
+        } 
+        #rd-box { 
+            float:right; 
+            width:150px; 
+            height:120px; 
+            background-color:blue; 
+            border:solid black; 
+        } 
+        h1 { 
+            color:Green; 
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: underline;
+        }
+        h3 {
+			  text-decoration: underline;
+			  color: Blue;
+		}
+        </style>  
+    </head>  
+      
+    <body> 
+        <center>  
+        <h1>LIVE NIFTY DATA</h1> 
+        <div>
+		    {% for x in niftyData.data %}
+		        <div > 
+		            <tr id="st-box" class="containerInside">
+		            	<h3>{{ x.symbol }}</h3>
+			            	<div class="container">
+			            		<div >
+			            			Series : {{x.series}}<br>
+			            			openPrice : {{x.openPrice}}<br>
+			            			highPrice : {{x.highPrice}}<br>
+			            			lowPrice : {{x.lowPrice}}<br>
+			            			ltp : {{x.ltp}}<br>
+			            			previousPrice : {{x.previousPrice}}<br>
+			            			netPrice : {{x.netPrice}}<br>
+			            			tradedQuantity : {{x.tradedQuantity}}<br>
+			            			turnoverInLakhs : {{x.turnoverInLakhs}}<br>
+			            			lastCorpAnnouncementDate : {{x.lastCorpAnnouncementDate}}<br>
+			            			lastCorpAnnouncement : {{x.lastCorpAnnouncement}}
+			            		</div>
+			            	</div>
+	            	</tr> 
+	            </div>
+		   {% endfor %}
+        	
+        </div> 
+        </center> 
+    </body> 
+</html> 
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,25 @@
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <h1>CREATE SNIPPET URLs</h1>
+</head>
+
+<body>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <input type="text" name="Snippet" placeholder="Add Snippet"/><br>
+    <button type="Submit">Create URL</button><br><br><br>
+    <div>
+    	<h4>Shareable URL</h4>
+    	 <textarea spellcheck="false" margin= 0px width= 514px height=44px>{{url}}</textarea>
+    </div>
+   
+  </form>
+</body>
+
+</html> 
+
+{% endblock %}
