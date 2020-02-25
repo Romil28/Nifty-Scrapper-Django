@@ -4,17 +4,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <h1>CREATE SNIPPET URLs</h1>
+  <h1>CREATE SNIPPET URL</h1>
+  <style type="text/css">  
+        .button-class {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 14px 40px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 12px;
+          margin: 4px 2px;
+        }
+
+      .input-class {
+        width: 50%;
+        height: 70px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        text-align: justify;
+      }
+
+      .textarea-class {
+        margin: 0px; 
+        width: 717px; 
+        height: 96px
+      }
+  </style>
 </head>
 
 <body>
   <form method="post" novalidate>
     {% csrf_token %}
-    <input type="text" name="Snippet" placeholder="Add Snippet"/><br>
-    <button type="Submit">Create URL</button><br><br><br>
+    <input type="text" class=input-class name="Snippet" placeholder="Add Snippet"/><br><br>
+    <button type="Submit" class=button-class>Create URL</button><br><br><br>
     <div>
     	<h4>Shareable URL</h4>
-    	 <textarea spellcheck="false" margin= 0px width= 514px height=44px>{{url}}</textarea>
+    	 <textarea class="textarea-class">{{url}}</textarea>
     </div>
    
   </form>

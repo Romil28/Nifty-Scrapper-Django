@@ -5,16 +5,45 @@
 <html>
 <head>
   <h1>VIEW SNIPPET URLs</h1>
+  <style type="text/css">  
+        .button-class {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 14px 40px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 12px;
+          margin: 4px 2px;
+        font-weight: bold;
+        }
+
+      .input-class {
+        width: 50%;
+        height: 70px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        text-align: justify;
+      }
+
+      .textarea-class {
+        margin: 0px; 
+        width: 717px; 
+        height: 96px
+      }
+   </style>
 </head>
 
 <body>
   <form method="post" novalidate>
     {% csrf_token %}
-    <input type="text" name="url" placeholder="Add Url"/><br>
-    <button type="Submit">View Snippet</button><br><br><br>
+    <input class=input-class type="text" name="url" placeholder="Add Url"/><br><br>
+    <button class=button-class type="Submit">View Snippet</button><br><br><br>
     <div>
     	<h4>Shared Snippet</h4>
-    	 <textarea spellcheck="false" margin= 0px width= 514px height=44px>{{data}}</textarea>
+    	 <textarea class="textarea-class">{{data}}</textarea>
     </div>
    
   </form>

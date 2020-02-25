@@ -1,155 +1,35 @@
 from django.shortcuts import render
-
+from django.core.cache import cache
 from django.views import generic
 
-def index(request):
-	
-	nifty_data = {
-  "data": [
-    {
-      "symbol": "INDUSINDBK",
-      "series": "EQ",
-      "openPrice": "1,145.05",
-      "highPrice": "1,203.85",
-      "lowPrice": "1,145.05",
-      "ltp": "1,180.95",
-      "previousPrice": "1,142.15",
-      "netPrice": "3.40",
-      "tradedQuantity": "1,57,03,698",
-      "turnoverInLakhs": "1,85,715.07",
-      "lastCorpAnnouncementDate": "08-Aug-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/Dividend - Rs 7.50 Per Share"
-    },
-    {
-      "symbol": "ZEEL",
-      "series": "EQ",
-      "openPrice": "252.50",
-      "highPrice": "260.85",
-      "lowPrice": "251.00",
-      "ltp": "260.55",
-      "previousPrice": "252.25",
-      "netPrice": "3.29",
-      "tradedQuantity": "96,84,251",
-      "turnoverInLakhs": "24,915.64",
-      "lastCorpAnnouncementDate": "15-Jul-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/ Dividend - Rs 3.50 Per Share"
-    },
-    {
-      "symbol": "TATASTEEL",
-      "series": "EQ",
-      "openPrice": "429.00",
-      "highPrice": "447.70",
-      "lowPrice": "428.00",
-      "ltp": "443.45",
-      "previousPrice": "433.20",
-      "netPrice": "2.37",
-      "tradedQuantity": "1,29,80,237",
-      "turnoverInLakhs": "57,238.95",
-      "lastCorpAnnouncementDate": "04-Jul-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/Dividend - Rs 13 Per Share"
-    },
-    {
-      "symbol": "SBIN",
-      "series": "EQ",
-      "openPrice": "319.35",
-      "highPrice": "329.20",
-      "lowPrice": "318.75",
-      "ltp": "327.90",
-      "previousPrice": "320.35",
-      "netPrice": "2.36",
-      "tradedQuantity": "4,01,50,409",
-      "turnoverInLakhs": "1,30,569.13",
-      "lastCorpAnnouncementDate": "15-Jun-2018",
-      "lastCorpAnnouncement": "Annual General Meeting\\/ Change In Registrar And Transfer Agent"
-    },
-    {
-      "symbol": "POWERGRID",
-      "series": "EQ",
-      "openPrice": "187.50",
-      "highPrice": "190.70",
-      "lowPrice": "185.90",
-      "ltp": "189.85",
-      "previousPrice": "187.50",
-      "netPrice": "1.25",
-      "tradedQuantity": "1,45,73,061",
-      "turnoverInLakhs": "27,353.64",
-      "lastCorpAnnouncementDate": "19-Aug-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/Dividend - Rs 2.50 Per Share"
-    },
-    {
-      "symbol": "ONGC",
-      "series": "EQ",
-      "openPrice": "102.00",
-      "highPrice": "104.10",
-      "lowPrice": "101.70",
-      "ltp": "102.75",
-      "previousPrice": "101.70",
-      "netPrice": "1.03",
-      "tradedQuantity": "2,83,78,025",
-      "turnoverInLakhs": "29,274.77",
-      "lastCorpAnnouncementDate": "22-Aug-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/Dividend - Rs 0.75 Per Share"
-    },
-    {
-      "symbol": "HINDALCO",
-      "series": "EQ",
-      "openPrice": "187.80",
-      "highPrice": "191.00",
-      "lowPrice": "185.40",
-      "ltp": "190.00",
-      "previousPrice": "188.10",
-      "netPrice": "1.01",
-      "tradedQuantity": "62,07,445",
-      "turnoverInLakhs": "11,720.28",
-      "lastCorpAnnouncementDate": "14-Aug-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/Dividend - Rs 1.20 Per Share"
-    },
-    {
-      "symbol": "COALINDIA",
-      "series": "EQ",
-      "openPrice": "177.75",
-      "highPrice": "180.25",
-      "lowPrice": "175.20",
-      "ltp": "179.10",
-      "previousPrice": "177.75",
-      "netPrice": "0.76",
-      "tradedQuantity": "1,67,76,977",
-      "turnoverInLakhs": "29,797.59",
-      "lastCorpAnnouncementDate": "09-Aug-2019",
-      "lastCorpAnnouncement": "Annual General Meeting"
-    },
-    {
-      "symbol": "YESBANK",
-      "series": "EQ",
-      "openPrice": "35.30",
-      "highPrice": "36.50",
-      "lowPrice": "34.65",
-      "ltp": "35.55",
-      "previousPrice": "35.30",
-      "netPrice": "0.71",
-      "tradedQuantity": "11,94,36,898",
-      "turnoverInLakhs": "42,782.30",
-      "lastCorpAnnouncementDate": "03-Jun-2019",
-      "lastCorpAnnouncement": "Annual General Meeting\\/ Dividend - Rs 2 Per Share"
-    },
-    {
-      "symbol": "HCLTECH",
-      "series": "EQ",
-      "openPrice": "611.00",
-      "highPrice": "612.95",
-      "lowPrice": "605.15",
-      "ltp": "610.00",
-      "previousPrice": "605.75",
-      "netPrice": "0.70",
-      "tradedQuantity": "48,20,313",
-      "turnoverInLakhs": "29,329.68",
-      "lastCorpAnnouncementDate": "24-Jan-2020",
-      "lastCorpAnnouncement": "Interim Dividend - Rs 2 Per Share"
-    }
-  ],
-  "time": "Feb 20, 2020 16:00:00"
-}
-	
+def create_nifty_required_data(data):
+  nifty_data = list()
+  for data in cached_data["data"]:
+    temp_nifty_dict = dict()
+    temp_nifty_dict["symbol"] = data["symbol"] if "symbol" in data and data["symbol"] else None
+    temp_nifty_dict["Last Traded Price"] = data["ltp"] if "ltp" in data and data["ltp"] else None
+    temp_nifty_dict["Open"] = data["openPrice"] if "openPrice" in data and data["openPrice"] else None
+    temp_nifty_dict["High"] = data["highPrice"] if "highPrice" in data and data["highPrice"] else None
+    temp_nifty_dict["Low"] = data["lowPrice"] if "lowPrice" in data and data["lowPrice"] else None
+    temp_nifty_dict["% Change"] = data["netPrice"] if "netPrice" in data and data["netPrice"] else None
+    temp_nifty_dict["Traded Quantity"] = data["tradedQuantity"] if "tradedQuantity" in data and data["tradedQuantity"] else None
+    temp_nifty_dict["Value(In lakhs)"] = data["lastCorpAnnouncement"] if "lastCorpAnnouncement" in data and data["lastCorpAnnouncement"] else None
+    temp_nifty_dict["Latest Ex Date"] = data["lastCorpAnnouncementDate"] if "lastCorpAnnouncementDate" in data and data["lastCorpAnnouncementDate"] else None
+    nifty_data.append(temp_nifty_dict)
 
-	return render(request, 'nifty.html', {"niftyData": nifty_data})
+  return nifty_data
+
+
+def NiftyView(request):
+  nifty_data = list()
+  try:
+    valid_key_for_data = cache.get('valid_key', None)
+    if valid_key_for_data:
+      cached_data = cache.get(valid_key_for_data, None)
+      if cached_data and "data" in cached_data and isinstance(cached_data, list) and cached_data["data"]:
+          nifty_data = create_nifty_required_data(data)
+    if nifty_data:
+    	return render(request, 'nifty.html', {"niftyData": nifty_data})
+  except Exception as ex:
+    raise ex
 

@@ -4,14 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <h1>HOME PAGE</h1>
+  <h1 align="left">HOME PAGE</h1>
+  <style type="text/css">  
+        .button-class {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 14px 40px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 12px;
+          margin: 4px 2px;
+	      font-weight: bold;
+        }
+     </style>
 </head>
 
 <body>
   <form method="post" novalidate>
     {% csrf_token %}
-    <a class="btn btn-primary" href="/link/sharable/">Create URL</a>
-    <a class="btn btn-primary" href="/link/view/">View Snippet</a> 
+    <a  class=button-class href="/link/sharable/">Create URL</a><nbsp><nbsp>
+    <a  class=button-class href="/link/view/">View Snippet</a> 
   </form>
 </body>
 
