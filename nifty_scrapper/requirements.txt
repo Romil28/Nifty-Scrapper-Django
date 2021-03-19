@@ -15,7 +15,7 @@ django-celery-beat==1.6.0
 django-redis==4.10.0
 django-scheduler==0.8.8
 django-timezone-field==3.1
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 enum34==1.1.9
 get==2019.4.13
 icalendar==4.0.4
